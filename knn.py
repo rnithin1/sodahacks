@@ -16,10 +16,8 @@ def main(longitude, latitude, hour):
     k = 10
     weights = [p[indices[i]]/distances[i] for i in range(k)]
     # print(weights)
-    rlat = np.sum([c[indices[i]][0]*weights[i] for i in range(k)])/np.sum(weights)
-    rlon = np.sum([c[indices[i]][1]*weights[i] for i in range(k)])/np.sum(weights)
-    
-    #print(rlat, rlon)
+    rlon = np.sum([c[indices[i]][0]*weights[i] for i in range(k)])/np.sum(weights)
+    rlat = np.sum([c[indices[i]][1]*weights[i] for i in range(k)])/np.sum(weights)
 
     return rlat, rlon
 
