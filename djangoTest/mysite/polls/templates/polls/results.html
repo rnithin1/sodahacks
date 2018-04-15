@@ -1,0 +1,46 @@
+<p> latitude: {{ text }} </p>
+<p> longitude: {{ textt }} </p>
+<p> {{ near1 }} </p>
+<p> {{ near2 }} </p>
+
+<a href="/polls/">Vote again</a>
+
+<div id="mapdiv"></div>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script>
+        map = new OpenLayers.Map("mapdiv");
+        map.addLayer(new OpenLayers.Layer.OSM());
+
+    var lonLat = new OpenLayers.LonLat(parseFloat({{  textt }}), parseFloat({{ text }})).transform(
+        new OpenLayers.Projection("EPSG:4326"),
+        map.getProjectionObject()
+      );
+      var markers = new OpenLayers.Layer.Markers( "Markers" );
+map.addLayer(markers);
+
+var size = new OpenLayers.Size(21,25);
+var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+var icon = new OpenLayers.Icon('https://cdn4.iconfinder.com/data/icons/office-use-icons/256/location-256x256-512.png', size, offset);
+markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(parseFloat({{  textt }}), parseFloat({{ text }})).transform(
+    new OpenLayers.Projection("EPSG:4326"),
+    map.getProjectionObject()
+  ),icon));
+markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(parseFloat({{  textt }}), parseFloat({{ text }})).transform(
+    new OpenLayers.Projection("EPSG:4326"),
+    map.getProjectionObject()
+  ),icon.clone()));
+  markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(parseFloat({{  near1 }}), parseFloat({{ near2 }})).transform(
+      new OpenLayers.Projection("EPSG:4326"),
+      map.getProjectionObject()
+    ),icon));
+  markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(parseFloat({{  near1 }}), parseFloat({{ near2 }})).transform(
+      new OpenLayers.Projection("EPSG:4326"),
+      map.getProjectionObject()
+    ),icon.clone()));
+;
+    var zoom=8;
+    map.setCenter (lonLat, zoom);
+
+
+    </script>
