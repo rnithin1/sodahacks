@@ -20,7 +20,7 @@ def main(longitude, latitude, hour):
     rlat = np.sum([c[indices[i]][1]*weights[i] for i in range(k)])/np.sum(weights)
 
     f = open("neighbour.txt", "w")
-    f.write('\n'.join('{} {}'.format(x for x in [rlon, rlat])))
+    f.write('\n'.join('{} {}'.format(x for x in [rlat, rlon])))
     return rlat, rlon
 
 # we are doing longitude, latitude
